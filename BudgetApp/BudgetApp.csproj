@@ -74,10 +74,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConsoleBudgetViewer.cs" />
+    <Compile Include="IBudgetRepository.cs" />
     <Compile Include="Option.cs" />
     <Compile Include="OptionsList.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SqliteBudgetRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

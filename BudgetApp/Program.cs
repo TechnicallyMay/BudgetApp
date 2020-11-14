@@ -7,12 +7,10 @@ namespace BudgetApp
     {
         static void Main(string[] args)
         {
-
-
             //Greeting the user
             Console.WriteLine("Welcome to your budget.");
 
-            var viewer = new ConsoleBudgetViewer();
+            var viewer = new ConsoleBudgetViewer(new NonsenseBudgetRepository());
 
             bool isRunning = true;
 
