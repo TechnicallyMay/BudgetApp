@@ -5,7 +5,31 @@ namespace BudgetApp
 {
     public class ConsoleBudgetViewer
     {
-        private decimal m_budget;
+        public ConsoleBudgetViewer()
+        {
+            CreateBudgetTable();
+        }
+
+        private void CreateBudgetTable()
+        {
+            string filePath = @"C:\Users\wheel\CS\Coding Projects\Budget App\BudgetApp\AppData\data.db";
+            //Create the file if it doesn't exist
+            System.IO.File.AppendText(filePath).Close();
+
+            using (var connection = new SqliteConnection($"Data Source={filePath}"))
+            {
+                connection.Open();
+
+                var createCommand = connection.CreateCommand();
+
+                //TODO: Create the table before the user tries to view the budget
+                createCommand.CommandText = @"CREATE TABLE IF NOT EXISTS budget_totals ( 
+                                                budget INTEGER
+                                              );";
+
+                createCommand.ExecuteNonQuery();
+            }
+        }
 
         public void EditBudget()
         {
@@ -72,15 +96,6 @@ namespace BudgetApp
             using (var connection = new SqliteConnection($"Data Source={filePath}"))
             {
                 connection.Open();
-
-                var createCommand = connection.CreateCommand();
-
-                //TODO: Create the table before the user tries to view the budget
-                createCommand.CommandText = @"CREATE TABLE IF NOT EXISTS budget_totals ( 
-                                                budget INTEGER
-                                              );";
-
-                createCommand.ExecuteNonQuery();
 
                 var insertCommand = connection.CreateCommand();
                 //TODO: We need to update a budget if it exists - how to identify which row?
